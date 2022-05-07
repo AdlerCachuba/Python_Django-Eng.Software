@@ -62,7 +62,7 @@ class Demanda(models.Model):
         max_length=50, verbose_name="Título da demanda", help_text="Digite o título da demanda")
     data_inicial = models.DateField(verbose_name='Data de início')
     data_final = models.DateField(verbose_name='Data final')
-    og = models.CharField(max_length=3,verbose_name="Ordem de grandeza")
+    og = models.IntegerField(verbose_name="Ordem de grandeza")
    
     lista_de_atividades = models.ForeignKey(Atividade, on_delete=models.PROTECT)
 
