@@ -9,13 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
+    {% block titulo %}
     <title>Dashboard - SB Admin</title>
+    {% endblock %}
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="sb-nav-fixed">
+
+    {% block menu %}
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
@@ -47,7 +52,13 @@
             </li>
         </ul>
     </nav>
+    {% endblock %}
+    
+    
+    
     <div id="layoutSidenav">
+
+            {% block menu-lateral %}
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
@@ -127,9 +138,13 @@
                 </div>
             </nav>
         </div>
+        {% endblock %}
+        
+        
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
+                    {% block conteudo %}
                     <h1 class="mt-4">Dashboard</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Dashboard</li>
@@ -681,16 +696,21 @@
                         </div>
                     </div>
                 </div>
+                {% endblock %}
+
+
             </main>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
+                        {% block rodape %}
                         <div class="text-muted">Copyright &copy; Your Website 2022</div>
                         <div>
                             <a href="#">Privacy Policy</a>
                             &middot;
                             <a href="#">Terms &amp; Conditions</a>
                         </div>
+                        {% endblock %}
                     </div>
                 </div>
             </footer>
@@ -707,6 +727,9 @@
  
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="{% static 'js/datatables-simple-demo.js' %}"></script>
+
+    {% block scripts %}
+    {% endblock %}
 </body>
 
 </html>
