@@ -2,6 +2,7 @@ from django.urls import path
 from .views import index, CidadeCreate,SetorCreate,PessoaCreate,DemandaCreate,AtividadeCreate
 from .views import SetorUpdate,CidadeUpdate,PessoaUpdate,DemandaUpdate,AtividadeUpdate
 from .views import SetorDelete,CidadeDelete,PessoaDelete, DemandaDelete, AtividadeDelete
+from .views import PessoaList
 
 urlpatterns = [
 
@@ -25,6 +26,8 @@ urlpatterns = [
     path('excluir/atividade/<int:pk>/',
          AtividadeDelete.as_view(), name='excluir-atividade'),
 
+
+    path('listar/pessoa/', PessoaList.as_view(), name='listar-pessoa'),
 
 
     path('', index.as_view(), name='index'),

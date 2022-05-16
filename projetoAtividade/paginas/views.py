@@ -1,6 +1,8 @@
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
+
 from .models import Cidade, Pessoa, Setor, Atividade, Demanda
 
 class index(TemplateView):
@@ -10,7 +12,7 @@ class PessoaCreate(CreateView):
     model = Pessoa
     fields = ['nome_completo', 'nascimento', 'email', 'senha', 'cidade']
     template_name = 'paginas/form.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listar-pessoa')
 
 
 class CidadeCreate(CreateView):
@@ -56,7 +58,7 @@ class PessoaUpdate(UpdateView):
     model = Pessoa
     fields = ['nome_completo', 'nascimento', 'email', 'senha', 'cidade']
     template_name = 'paginas/form.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listar-pessoa')
 
 
 class CidadeUpdate(UpdateView):
@@ -126,3 +128,8 @@ class PessoaDelete(DeleteView):
     model = Pessoa
     template_name = 'paginas/form-delete.html'
     success_url = reverse_lazy('index')
+
+
+class PessoaList(ListView):
+    model = Pessoa
+    template_name = 'paginas/listas/pessoa.html'
