@@ -127,7 +127,7 @@ class CidadeDelete(DeleteView):
 class PessoaDelete(DeleteView):
     model = Pessoa
     template_name = 'paginas/form-delete.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listar-pessoa')
 
 
 class PessoaList(ListView):
