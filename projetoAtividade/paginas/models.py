@@ -10,6 +10,8 @@ ESTADOS = [
 class Cidade(models.Model):
     nome = models.CharField(max_length=100,verbose_name="Nome da cidade")
     estado = models.CharField(max_length=2,choices=ESTADOS)
+    criado_em = models.DateTimeField(auto_now_add=True)
+    atualizado_em = models.DateTimeField(auto_now=True)
     
     def __str__(self):
         return self.nome + "/" + self.estado
@@ -20,9 +22,9 @@ class Pessoa(models.Model):
     #Verbose_name = Mostra o texto na label
     nome_completo = models.CharField(max_length=50, verbose_name="Nome da pessoa", help_text="Digite seu nome completo")
     nascimento = models.DateField(verbose_name='Data de nascimento')
-    email = models.CharField(max_length=100,verbose_name="Email")
-    senha = models.CharField(max_length=100,verbose_name="Senha")
     cidade = models.ForeignKey(Cidade, on_delete=models.PROTECT)
+    criado_em = models.DateTimeField(auto_now_add=True)
+    atualizado_em = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return '{} ({})'.format(self.nome, self.nascimento)
@@ -34,6 +36,8 @@ class Setor(models.Model):
     area_atuacao = models.CharField(
         max_length=100, verbose_name="Área de atuação")
     email = models.CharField(max_length=100, verbose_name="Email")
+    criado_em = models.DateTimeField(auto_now_add=True)
+    atualizado_em = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return '{} ({})'.format(self.nome)
@@ -48,7 +52,9 @@ class Atividade(models.Model):
     is_urgente = models.BooleanField(verbose_name="É urgente?")
     descricao = models.CharField(
         max_length=100, verbose_name="Descrição da demanda")
-    setor = models.ForeignKey(Setor, on_delete=models.PROTECT)
+    setor = models.ForeignKey(Setor, on_delete=models.PROTECT, null=true)
+    criado_em = models.DateTimeField(auto_now_add=True)
+    atualizado_em = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return '{} ({})'.format(self.nome)
@@ -63,7 +69,9 @@ class Demanda(models.Model):
     data_inicial = models.DateField(verbose_name='Data de início')
     data_final = models.DateField(verbose_name='Data final')
     og = models.IntegerField(verbose_name="Ordem de grandeza")
-   
+    criado_em = models.DateTimeField(auto_now_add=True)
+    atualizado_em = models.DateTimeField(auto_now=True)
+
     lista_de_atividades = models.ForeignKey(Atividade, on_delete=models.PROTECT)
 
     def __str__(self):

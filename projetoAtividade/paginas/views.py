@@ -10,7 +10,7 @@ class index(TemplateView):
 
 class PessoaCreate(CreateView):
     model = Pessoa
-    fields = ['nome_completo', 'nascimento', 'email', 'senha', 'cidade']
+    fields = ['nome_completo', 'nascimento', 'cidade']
     template_name = 'paginas/form.html'
     success_url = reverse_lazy('listar-pessoa')
 
@@ -56,7 +56,7 @@ class DemandaCreate(CreateView):
 
 class PessoaUpdate(UpdateView):
     model = Pessoa
-    fields = ['nome_completo', 'nascimento', 'email', 'senha', 'cidade']
+    fields = ['nome_completo', 'nascimento','cidade']
     template_name = 'paginas/form.html'
     success_url = reverse_lazy('listar-pessoa')
 
