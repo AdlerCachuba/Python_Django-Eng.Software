@@ -52,7 +52,7 @@ class Atividade(models.Model):
     is_urgente = models.BooleanField(verbose_name="É urgente?")
     descricao = models.CharField(
         max_length=100, verbose_name="Descrição da demanda")
-    setor = models.ForeignKey(Setor, on_delete=models.PROTECT, null=true)
+    setor = models.ForeignKey(Setor, on_delete=models.PROTECT, null=True)
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
 

@@ -3,26 +3,28 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from .models import Cidade, Pessoa, Setor, Atividade, Demanda
 
 class index(TemplateView):
     template_name = 'paginas/index.html'
 
-class PessoaCreate(CreateView):
+class PessoaCreate(LoginRequiredMixin, CreateView):
     model = Pessoa
     fields = ['nome_completo', 'nascimento', 'cidade']
     template_name = 'paginas/form.html'
     success_url = reverse_lazy('listar-pessoa')
 
 
-class CidadeCreate(CreateView):
+class CidadeCreate(LoginRequiredMixin, CreateView):
     model = Cidade
     fields = ['nome', 'estado']
     template_name = 'paginas/form.html'
     success_url = reverse_lazy('index')
 
 
-class SetorCreate(CreateView):
+class SetorCreate(LoginRequiredMixin, CreateView):
     model = Setor
     fields = ['nome',
               'area_atuacao',
@@ -31,7 +33,7 @@ class SetorCreate(CreateView):
     success_url = reverse_lazy('index')
 
 
-class AtividadeCreate(CreateView):
+class AtividadeCreate(LoginRequiredMixin, CreateView):
     model = Atividade
     fields = ['titulo',
               'data_entrega',
@@ -43,7 +45,7 @@ class AtividadeCreate(CreateView):
     success_url = reverse_lazy('index')
 
 
-class DemandaCreate(CreateView):
+class DemandaCreate(LoginRequiredMixin, CreateView):
     model = Demanda
     fields = ['titulo',
               'data_inicial',
@@ -54,21 +56,21 @@ class DemandaCreate(CreateView):
     success_url = reverse_lazy('index')
 
 
-class PessoaUpdate(UpdateView):
+class PessoaUpdate(LoginRequiredMixin, UpdateView):
     model = Pessoa
     fields = ['nome_completo', 'nascimento','cidade']
     template_name = 'paginas/form.html'
     success_url = reverse_lazy('listar-pessoa')
 
 
-class CidadeUpdate(UpdateView):
+class CidadeUpdate(LoginRequiredMixin, UpdateView):
     model = Cidade
     fields = ['nome', 'estado']
     template_name = 'paginas/form.html'
     success_url = reverse_lazy('index')
 
 
-class SetorUpdate(UpdateView):
+class SetorUpdate(LoginRequiredMixin, UpdateView):
     model = Setor
     fields = ['nome',
               'area_atuacao',
@@ -77,7 +79,7 @@ class SetorUpdate(UpdateView):
     success_url = reverse_lazy('index')
 
 
-class AtividadeUpdate(UpdateView):
+class AtividadeUpdate(LoginRequiredMixin, UpdateView):
     model = Atividade
     fields = ['titulo',
               'data_entrega',
@@ -89,7 +91,7 @@ class AtividadeUpdate(UpdateView):
     success_url = reverse_lazy('index')
 
 
-class DemandaUpdate(UpdateView):
+class DemandaUpdate(LoginRequiredMixin, UpdateView):
     model = Demanda
     fields = ['titulo',
               'data_inicial',
@@ -100,36 +102,38 @@ class DemandaUpdate(UpdateView):
     success_url = reverse_lazy('index')
 
 #=##############
-class DemandaDelete(DeleteView):
+
+
+class DemandaDelete(LoginRequiredMixin, DeleteView):
     model = Demanda
     template_name = 'cadastros/form-delete.html'
     sucess_url = reverse_lazy('index')
     
 
-class AtividadeDelete(DeleteView):
+class AtividadeDelete(LoginRequiredMixin, DeleteView):
     model = Atividade
     template_name = 'paginas/form-delete.html'
     success_url = reverse_lazy('index')
 
 
-class SetorDelete(DeleteView):
+class SetorDelete(LoginRequiredMixin, DeleteView):
     model = Setor
     template_name = 'paginas/form-delete.html'
     success_url = reverse_lazy('index')
 
 
-class CidadeDelete(DeleteView):
+class CidadeDelete(LoginRequiredMixin, DeleteView):
     model = Cidade
     template_name = 'paginas/form-delete.html'
     success_url = reverse_lazy('index')
 
 
-class PessoaDelete(DeleteView):
+class PessoaDelete(LoginRequiredMixin, DeleteView):
     model = Pessoa
     template_name = 'paginas/form-delete.html'
     success_url = reverse_lazy('listar-pessoa')
 
 
-class PessoaList(ListView):
+class PessoaList(LoginRequiredMixin, ListView):
     model = Pessoa
     template_name = 'paginas/listas/pessoa.html'
