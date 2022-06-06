@@ -14,7 +14,7 @@
     <title>ORGANIZACAO SUPREMA</title>
 
 
-    <link href="{% static %}" rel="stylesheet" />
+    <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
@@ -32,11 +32,15 @@
                                 <div class="card-body">
 
                                     
-                                    {% for m in message %}
+                                    {% if form.errors %}
+                                    <div class="alert alert-danger" role="alert">
+                                        <strong>Atenção! Usuario ou senha nao existe</strong>
+                                    </div>
                                     <!-- não conseugi dar conta de copiar tudo em sala de aula pq to passando mal-->
                                     {% endif%}
 
                                     <form method="POST">
+                                        {% csrf_token %}
                                         <div class="form-floating mb-3">
                                             <input class="form-control" id="inputEmail" type="email"
                                                 placeholder="fulano" />
