@@ -42,13 +42,13 @@
                                     <form method="POST">
                                         {% csrf_token %}
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="inputEmail" type="email"
-                                                placeholder="fulano" />
+                                            <input class="form-control" id="id_username" type="email"
+                                                placeholder="fulano" autofocus required />
                                             <label for="inputEmail">Usuário</label>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="inputPassword" type="password"
-                                                placeholder="Password" name="password"/>
+                                            <input class="form-control" id="id_password" type="password"
+                                                placeholder="Password" name="password" required/>
                                             <label for="inputPassword">Senha</label>
                                         </div>
                                         <div class="form-check mb-3">
@@ -59,9 +59,14 @@
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                             <a class="small" href="password.html">Forgot Password?</a>
-                                            <a class="btn btn-primary" href="index.html">Login</a>
+                                            <button type="submit" class="btn btn-primary">Login</button>
                                         </div>
                                     </form>
+                                    <!-- PERDI O CONTEXTO EM SALA DE AULA, PRECISA COPIAR DEPOIS -->
+                                    <!-- {% else %}
+                                        <h4>Você já está logado!</h4>
+                                    {% endif %} -->
+
                                 </div>
                                 <div class="card-footer text-center py-3">
                                     <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
