@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Aqui a gente pode criar varias classes referente a esse assunto.
 ESTADOS = [
@@ -12,7 +13,8 @@ class Cidade(models.Model):
     estado = models.CharField(max_length=2,choices=ESTADOS)
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
-    
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
+
     def __str__(self):
         return self.nome + "/" + self.estado
 
@@ -25,6 +27,7 @@ class Pessoa(models.Model):
     cidade = models.ForeignKey(Cidade, on_delete=models.PROTECT)
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return '{} ({})'.format(self.nome, self.nascimento)
@@ -38,6 +41,7 @@ class Setor(models.Model):
     email = models.CharField(max_length=100, verbose_name="Email")
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return '{} ({})'.format(self.nome)
@@ -55,6 +59,7 @@ class Atividade(models.Model):
     setor = models.ForeignKey(Setor, on_delete=models.PROTECT, null=True)
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return '{} ({})'.format(self.nome)
@@ -71,8 +76,8 @@ class Demanda(models.Model):
     og = models.IntegerField(verbose_name="Ordem de grandeza")
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
-
     lista_de_atividades = models.ForeignKey(Atividade, on_delete=models.PROTECT)
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return '{} ({})'.format(self.nome)
