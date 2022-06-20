@@ -17,6 +17,17 @@ class PessoaCreate(LoginRequiredMixin, CreateView):
     fields = ['nome_completo', 'nascimento', 'cidade']
     template_name = 'paginas/form.html'
     success_url = reverse_lazy('listar-pessoa')
+    def form_valid(self,form):
+        #form.instance.nome_do_atributo = valor
+        form.instance.usuario = self.request.user
+        
+        #só tem no create view
+
+        #validando os dados do form antes de criar o objeto(nao está no banco)
+        url = super().form_valid(form)
+
+        #aqui vc tem o objeto (dados inseridos no banco)
+        return url
 
 
 class CidadeCreate(LoginRequiredMixin, CreateView):
@@ -25,6 +36,17 @@ class CidadeCreate(LoginRequiredMixin, CreateView):
     template_name = 'paginas/form.html'
     success_url = reverse_lazy('index')
 
+    def form_valid(self, form):
+        #form.instance.nome_do_atributo = valor
+        form.instance.usuario = self.request.user
+
+        #só tem no create view
+
+        #validando os dados do form antes de criar o objeto(nao está no banco)
+        url = super().form_valid(form)
+
+        #aqui vc tem o objeto (dados inseridos no banco)
+        return url
 
 class SetorCreate(LoginRequiredMixin, CreateView):
     model = Setor
@@ -34,6 +56,17 @@ class SetorCreate(LoginRequiredMixin, CreateView):
     template_name = 'paginas/form.html'
     success_url = reverse_lazy('index')
 
+    def form_valid(self, form):
+        #form.instance.nome_do_atributo = valor
+        form.instance.usuario = self.request.user
+
+        #só tem no create view
+
+        #validando os dados do form antes de criar o objeto(nao está no banco)
+        url = super().form_valid(form)
+
+        #aqui vc tem o objeto (dados inseridos no banco)
+        return url
 
 class AtividadeCreate(LoginRequiredMixin, CreateView):
     model = Atividade
@@ -46,6 +79,17 @@ class AtividadeCreate(LoginRequiredMixin, CreateView):
     template_name = 'paginas/form.html'
     success_url = reverse_lazy('index')
 
+    def form_valid(self, form):
+        #form.instance.nome_do_atributo = valor
+        form.instance.usuario = self.request.user
+
+        #só tem no create view
+
+        #validando os dados do form antes de criar o objeto(nao está no banco)
+        url = super().form_valid(form)
+
+        #aqui vc tem o objeto (dados inseridos no banco)
+        return url
 
 class DemandaCreate(LoginRequiredMixin, CreateView):
     model = Demanda
@@ -57,6 +101,17 @@ class DemandaCreate(LoginRequiredMixin, CreateView):
     template_name = 'paginas/form.html'
     success_url = reverse_lazy('index')
 
+    def form_valid(self, form):
+        #form.instance.nome_do_atributo = valor
+        form.instance.usuario = self.request.user
+
+        #só tem no create view
+
+        #validando os dados do form antes de criar o objeto(nao está no banco)
+        url = super().form_valid(form)
+
+        #aqui vc tem o objeto (dados inseridos no banco)
+        return url
 
 class PessoaUpdate(LoginRequiredMixin, GroupRequiredMixin,  UpdateView):
     model = Pessoa
