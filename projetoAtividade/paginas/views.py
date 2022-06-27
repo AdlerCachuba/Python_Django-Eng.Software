@@ -140,6 +140,11 @@ class CidadeUpdate(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
     success_url = reverse_lazy('index')
     group_required = u"Administrador"
 
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(
+            Cidade, pk=self.kwargs['pk'], usuario=self.request.user)
+        return self.object
+
 class SetorUpdate(LoginRequiredMixin, GroupRequiredMixin,  UpdateView):
     model = Setor
     fields = ['nome',
@@ -148,6 +153,11 @@ class SetorUpdate(LoginRequiredMixin, GroupRequiredMixin,  UpdateView):
     template_name = 'paginas/form.html'
     success_url = reverse_lazy('index')
     group_required = u"Administrador"
+
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(
+            Setor, pk=self.kwargs['pk'], usuario=self.request.user)
+        return self.object
 
 class AtividadeUpdate(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
     model = Atividade
@@ -161,6 +171,11 @@ class AtividadeUpdate(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
     success_url = reverse_lazy('index')
     group_required = u"Administrador"
 
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(
+            Atividade, pk=self.kwargs['pk'], usuario=self.request.user)
+        return self.object
+
 class DemandaUpdate(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
     model = Demanda
     fields = ['titulo',
@@ -171,14 +186,23 @@ class DemandaUpdate(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
     template_name = 'paginas/form.html'
     success_url = reverse_lazy('index')
     group_required = u"Administrador"
+
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(
+            Demanda, pk=self.kwargs['pk'], usuario=self.request.user)
+        return self.object
+
 #=##############
-
-
 class DemandaDelete(LoginRequiredMixin, GroupRequiredMixin,  DeleteView):
     model = Demanda
     template_name = 'cadastros/form-delete.html'
     sucess_url = reverse_lazy('index')
     group_required = u"Administrador"
+
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(
+            Demanda, pk=self.kwargs['pk'], usuario=self.request.user)
+        return self.object
 
 class AtividadeDelete(LoginRequiredMixin, GroupRequiredMixin,  DeleteView):
     model = Atividade
@@ -186,11 +210,21 @@ class AtividadeDelete(LoginRequiredMixin, GroupRequiredMixin,  DeleteView):
     success_url = reverse_lazy('index')
     group_required = u"Administrador"
 
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(
+            Atividade, pk=self.kwargs['pk'], usuario=self.request.user)
+        return self.object
+
 class SetorDelete(LoginRequiredMixin, GroupRequiredMixin,  DeleteView):
     model = Setor
     template_name = 'paginas/form-delete.html'
     success_url = reverse_lazy('index')
     group_required = u"Administrador"
+
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(
+            Setor, pk=self.kwargs['pk'], usuario=self.request.user)
+        return self.object
 
 class CidadeDelete(LoginRequiredMixin, GroupRequiredMixin,  DeleteView):
     model = Cidade
@@ -198,12 +232,21 @@ class CidadeDelete(LoginRequiredMixin, GroupRequiredMixin,  DeleteView):
     success_url = reverse_lazy('index')
     group_required = u"Administrador"
 
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(
+            Cidade, pk=self.kwargs['pk'], usuario=self.request.user)
+        return self.object
+
 class PessoaDelete(LoginRequiredMixin, GroupRequiredMixin, DeleteView):
     model = Pessoa
     template_name = 'paginas/form-delete.html'
     success_url = reverse_lazy('listar-pessoa')
     group_required = u"Administrador"
 
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(
+            Pessoa, pk=self.kwargs['pk'], usuario=self.request.user)
+        return self.object
 
 #Preciso fazer a lista de todas as classes
 class PessoaList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
