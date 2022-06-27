@@ -9,6 +9,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Cidade, Pessoa, Setor, Atividade, Demanda
 
+from django.shortcuts import get_object_or_404
+
 class index(TemplateView):
     template_name = 'paginas/index.html'
 
@@ -109,8 +111,13 @@ class DemandaCreate(LoginRequiredMixin, CreateView):
 
         #validando os dados do form antes de criar o objeto(nao está no banco)
         url = super().form_valid(form)
-
+        
         #aqui vc tem o objeto (dados inseridos no banco)
+        #Como por exemplo:
+        #self.object.codigo = hash(self.object.pk)
+        #aí você tem que salvar o objeto de novo
+        #self.object.save()
+
         return url
 
 class PessoaUpdate(LoginRequiredMixin, GroupRequiredMixin,  UpdateView):
@@ -119,6 +126,12 @@ class PessoaUpdate(LoginRequiredMixin, GroupRequiredMixin,  UpdateView):
     template_name = 'paginas/form.html'
     success_url = reverse_lazy('listar-pessoa')
     group_required = u"Administrador"
+
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(
+            Pessoa, pk=self.kwargs['pk'], usuario=self.request.user)
+        return self.object
+
 
 class CidadeUpdate(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
     model = Cidade
@@ -191,7 +204,13 @@ class PessoaDelete(LoginRequiredMixin, GroupRequiredMixin, DeleteView):
     success_url = reverse_lazy('listar-pessoa')
     group_required = u"Administrador"
 
+
+#Preciso fazer a lista de todas as classes
 class PessoaList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
     model = Pessoa
     template_name = 'paginas/listas/pessoa.html'
     group_required = u"Administrador"
+
+    def get_queryset(self):
+        self.object_list = Pessoa.objects.filter(usuario=self.request.user)
+        return self.object_list
