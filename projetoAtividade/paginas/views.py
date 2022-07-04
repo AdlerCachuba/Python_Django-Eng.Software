@@ -1,3 +1,4 @@
+from pipes import Template
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
@@ -257,3 +258,22 @@ class PessoaList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
     def get_queryset(self):
         self.object_list = Pessoa.objects.filter(usuario=self.request.user)
         return self.object_list
+
+
+
+class PaginaInicialView(TemplateView):
+    template_name = 'paginas/index.html'
+
+    def get_context_data(self, *args,**kwargs):
+        dados = super().get_context_data(self,*args,**kwargs)
+
+        if(self.request.user.is_authenticated):
+
+            dados["pessoas"] = Atividade.objects.filter(
+                atividade__usuario = self.request.user,
+                is_urgente__isnull = False
+                )
+
+        else:
+            dados["pessoas"] = 0
+        return dados 
