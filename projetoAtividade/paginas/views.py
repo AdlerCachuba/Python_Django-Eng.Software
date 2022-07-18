@@ -93,6 +93,11 @@ class AtividadeCreate(LoginRequiredMixin, CreateView):
 
         #aqui vc tem o objeto (dados inseridos no banco)
         return url
+    def get_context_data(self,*args,**kwargs):
+        dados = super().get_context_data(*args,*kwargs)
+        dados["form"].fields["setor"].queryset= Setor.objects.filter(usuario=self.request.user)
+
+        return dados
 
 class DemandaCreate(LoginRequiredMixin, CreateView):
     model = Demanda
@@ -177,6 +182,13 @@ class AtividadeUpdate(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
             Atividade, pk=self.kwargs['pk'], usuario=self.request.user)
         return self.object
 
+    def get_context_data(self, *args, **kwargs):
+        dados = super().get_context_data(*args, *kwargs)
+        dados["form"].fields["setor"].queryset = Setor.objects.filter(
+            usuario=self.request.user)
+        return dados
+
+
 class DemandaUpdate(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
     model = Demanda
     fields = ['titulo',
@@ -251,7 +263,7 @@ class PessoaDelete(LoginRequiredMixin, GroupRequiredMixin, DeleteView):
 
 
 class DemandaList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
-    model = DemandaList
+    model = Demanda
     template_name = 'paginas/listas/demanda.html'
 
     def get_queryset(self):
@@ -259,7 +271,7 @@ class DemandaList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
         return self.object_list
 
 class AtividadeList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
-    model = AtividadeList
+    model = Atividade
     template_name = 'paginas/listas/atividade.html'
 
     def get_queryset(self):
@@ -267,7 +279,7 @@ class AtividadeList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
         return self.object_list
 
 class SetorList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
-    model = SetorList
+    model = Setor
     template_name = 'paginas/listas/setor.html'
 
     def get_queryset(self):
@@ -275,7 +287,7 @@ class SetorList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
         return self.object_list
 
 class CidadeList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
-    model = CidadeList
+    model = Cidade
     template_name = 'paginas/listas/cidade.html'
 
     def get_queryset(self):
