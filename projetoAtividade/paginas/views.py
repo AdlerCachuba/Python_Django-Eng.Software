@@ -249,11 +249,43 @@ class PessoaDelete(LoginRequiredMixin, GroupRequiredMixin, DeleteView):
             Pessoa, pk=self.kwargs['pk'], usuario=self.request.user)
         return self.object
 
+
+class DemandaList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
+    model = DemandaList
+    template_name = 'paginas/listas/demanda.html'
+
+    def get_queryset(self):
+        self.object_list = Demanda.objects.filter(usuario=self.request.user)
+        return self.object_list
+
+class AtividadeList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
+    model = AtividadeList
+    template_name = 'paginas/listas/atividade.html'
+
+    def get_queryset(self):
+        self.object_list = Atividade.objects.filter(usuario=self.request.user)
+        return self.object_list
+
+class SetorList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
+    model = SetorList
+    template_name = 'paginas/listas/setor.html'
+
+    def get_queryset(self):
+        self.object_list = Setor.objects.filter(usuario=self.request.user)
+        return self.object_list
+
+class CidadeList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
+    model = CidadeList
+    template_name = 'paginas/listas/cidade.html'
+
+    def get_queryset(self):
+        self.object_list = Cidade.objects.filter(usuario=self.request.user)
+        return self.object_list
+
 #Preciso fazer a lista de todas as classes
 class PessoaList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
     model = Pessoa
     template_name = 'paginas/listas/pessoa.html'
-    group_required = u"Administrador"
 
     def get_queryset(self):
         self.object_list = Pessoa.objects.filter(usuario=self.request.user)
