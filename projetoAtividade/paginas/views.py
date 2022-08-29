@@ -37,7 +37,7 @@ class CidadeCreate(LoginRequiredMixin, CreateView):
     model = Cidade
     fields = ['nome', 'estado']
     template_name = 'paginas/form.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listar-cidade')
 
     def form_valid(self, form):
         #form.instance.nome_do_atributo = valor
@@ -57,7 +57,7 @@ class SetorCreate(LoginRequiredMixin, CreateView):
               'area_atuacao',
               'email']
     template_name = 'paginas/form.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listar-setor')
 
     def form_valid(self, form):
         #form.instance.nome_do_atributo = valor
@@ -80,7 +80,7 @@ class AtividadeCreate(LoginRequiredMixin, CreateView):
               'descricao',
               'setor']
     template_name = 'paginas/form.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listar-atividade')
 
     def form_valid(self, form):
         #form.instance.nome_do_atributo = valor
@@ -107,7 +107,7 @@ class DemandaCreate(LoginRequiredMixin, CreateView):
               'og',
               'lista_de_atividades']
     template_name = 'paginas/form.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listar-demanda')
 
     def form_valid(self, form):
         #form.instance.nome_do_atributo = valor
@@ -143,7 +143,7 @@ class CidadeUpdate(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
     model = Cidade
     fields = ['nome', 'estado']
     template_name = 'paginas/form.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listar-cidade')
     group_required = u"Administrador"
 
     def get_object(self, queryset=None):
@@ -157,7 +157,7 @@ class SetorUpdate(LoginRequiredMixin, GroupRequiredMixin,  UpdateView):
               'area_atuacao',
               'email']
     template_name = 'paginas/form.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listar-setor')
     group_required = u"Administrador"
 
     def get_object(self, queryset=None):
@@ -174,7 +174,7 @@ class AtividadeUpdate(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
               'descricao',
               'setor']
     template_name = 'paginas/form.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listar-atividade')
     group_required = u"Administrador"
 
     def get_object(self, queryset=None):
@@ -197,7 +197,7 @@ class DemandaUpdate(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
               'og',
               'lista_de_atividades']
     template_name = 'paginas/form.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listar-demanda')
     group_required = u"Administrador"
 
     def get_object(self, queryset=None):
@@ -209,7 +209,7 @@ class DemandaUpdate(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
 class DemandaDelete(LoginRequiredMixin, GroupRequiredMixin,  DeleteView):
     model = Demanda
     template_name = 'cadastros/form-delete.html'
-    sucess_url = reverse_lazy('index')
+    sucess_url = reverse_lazy('listar-demanda')
     group_required = u"Administrador"
 
     def get_object(self, queryset=None):
@@ -220,7 +220,7 @@ class DemandaDelete(LoginRequiredMixin, GroupRequiredMixin,  DeleteView):
 class AtividadeDelete(LoginRequiredMixin, GroupRequiredMixin,  DeleteView):
     model = Atividade
     template_name = 'paginas/form-delete.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listar-atividade')
     group_required = u"Administrador"
 
     def get_object(self, queryset=None):
@@ -231,7 +231,7 @@ class AtividadeDelete(LoginRequiredMixin, GroupRequiredMixin,  DeleteView):
 class SetorDelete(LoginRequiredMixin, GroupRequiredMixin,  DeleteView):
     model = Setor
     template_name = 'paginas/form-delete.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listar-setor')
     group_required = u"Administrador"
 
     def get_object(self, queryset=None):
@@ -242,7 +242,7 @@ class SetorDelete(LoginRequiredMixin, GroupRequiredMixin,  DeleteView):
 class CidadeDelete(LoginRequiredMixin, GroupRequiredMixin,  DeleteView):
     model = Cidade
     template_name = 'paginas/form-delete.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listar-cidade')
     group_required = u"Administrador"
 
     def get_object(self, queryset=None):
@@ -265,6 +265,7 @@ class PessoaDelete(LoginRequiredMixin, GroupRequiredMixin, DeleteView):
 class DemandaList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
     model = Demanda
     template_name = 'paginas/listas/demanda.html'
+    group_required = u"Administrador"
 
     def get_queryset(self):
         self.object_list = Demanda.objects.filter(usuario=self.request.user)
@@ -273,6 +274,7 @@ class DemandaList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
 class AtividadeList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
     model = Atividade
     template_name = 'paginas/listas/atividade.html'
+    group_required = u"Administrador"
 
     def get_queryset(self):
         self.object_list = Atividade.objects.filter(usuario=self.request.user)
@@ -281,6 +283,7 @@ class AtividadeList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
 class SetorList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
     model = Setor
     template_name = 'paginas/listas/setor.html'
+    group_required = u"Administrador"
 
     def get_queryset(self):
         self.object_list = Setor.objects.filter(usuario=self.request.user)
@@ -289,6 +292,7 @@ class SetorList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
 class CidadeList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
     model = Cidade
     template_name = 'paginas/listas/cidade.html'
+    group_required = u"Administrador"
 
     def get_queryset(self):
         self.object_list = Cidade.objects.filter(usuario=self.request.user)
@@ -298,6 +302,7 @@ class CidadeList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
 class PessoaList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
     model = Pessoa
     template_name = 'paginas/listas/pessoa.html'
+    group_required = u"Administrador"
 
     def get_queryset(self):
         self.object_list = Pessoa.objects.filter(usuario=self.request.user)
