@@ -78,7 +78,7 @@ class AtividadeCreate(LoginRequiredMixin, CreateView):
               'status',
               'is_urgente',
               'descricao',
-              'setor']
+             'setor']
     template_name = 'paginas/form.html'
     success_url = reverse_lazy('listar-atividade')
 
@@ -298,7 +298,6 @@ class CidadeList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
         self.object_list = Cidade.objects.filter(usuario=self.request.user)
         return self.object_list
 
-#Preciso fazer a lista de todas as classes
 class PessoaList(LoginRequiredMixin, GroupRequiredMixin,  ListView):
     model = Pessoa
     template_name = 'paginas/listas/pessoa.html'

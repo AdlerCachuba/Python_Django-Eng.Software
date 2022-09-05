@@ -44,7 +44,7 @@ class Setor(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
-        return '{} ({})'.format(self.nome)
+        return '{}'.format(self.nome)
 
 
 class Atividade(models.Model):
@@ -62,7 +62,7 @@ class Atividade(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
-        return '{} ({})'.format(self.nome)
+        return '{}'.format(self.nome)
 
 
 
@@ -80,7 +80,7 @@ class Demanda(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
-        return '{} ({})'.format(self.nome)
+        return '{}'.format(self.nome)
 
 
 
