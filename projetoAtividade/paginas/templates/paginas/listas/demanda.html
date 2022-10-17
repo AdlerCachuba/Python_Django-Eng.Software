@@ -2,12 +2,16 @@
 
 {% load static %}
 
+{% load meus_filtros %}
+
 {% block conteudo %}
 
 <h1 class="mt-4">Lista de Demanda</h1>
 <a href="{% url 'cadastrar-demanda' %}" class="btn btn-primary float-right ms-5">Cadastrar Demanda</a>
 <hr>
 <table class="table table-striped">
+
+    
 
     <thead>
         <tr>
@@ -25,6 +29,11 @@
     <tbody>
         {% for obj in object_list %}
             <tr>
+                <!-- <td>{{obj.titulo}}</td> -->
+                <!-- era assim, eu mudei pra usar o filtro -->
+                <!-- assim ira remover todas as letras a do titulo-->
+                <!-- <td>{{obj.titulo|remover:"a"}}</td> -->
+                <!-- <td>{{obj.titulo|verificardddpr}}</td> -->
                 <td>{{obj.titulo}}</td>
                 <td>{{obj.data_inicial}}</td>
                 <td>{{obj.data_final}}</td>
