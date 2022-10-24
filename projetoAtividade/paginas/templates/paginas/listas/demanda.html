@@ -10,9 +10,6 @@
 <a href="{% url 'cadastrar-demanda' %}" class="btn btn-primary float-right ms-5">Cadastrar Demanda</a>
 <hr>
 <table class="table table-striped">
-
-    
-
     <thead>
         <tr>
             <th>
@@ -29,14 +26,14 @@
     <tbody>
         {% for obj in object_list %}
             <tr>
-                <!-- <td>{{obj.titulo}}</td> -->
-                <!-- era assim, eu mudei pra usar o filtro -->
-                <!-- assim ira remover todas as letras a do titulo-->
-                <!-- <td>{{obj.titulo|remover:"a"}}</td> -->
-                <!-- <td>{{obj.titulo|verificardddpr}}</td> -->
+
                 <td>{{obj.titulo}}</td>
                 <td>{{obj.data_inicial}}</td>
-                <td>{{obj.data_final}}</td>
+                {% if obj.data_final|filtroDataFinal %}
+                <td class="text-success">{{obj.data_final}}</td>
+                {% else %}
+                <td class="text-danger">{{obj.data_final}}</td>
+                {% endif %}
                 <td>{{obj.og}}</td>
                 <td>{{obj.lista_de_atividades}}</td>
 

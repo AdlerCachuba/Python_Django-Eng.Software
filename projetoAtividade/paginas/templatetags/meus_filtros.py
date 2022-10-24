@@ -1,4 +1,5 @@
 from django import template
+from datetime import date
 
 register = template.Library()
 
@@ -13,4 +14,12 @@ def verificardddpr(telefone):
     if(ddd== "44"):
         return True
     else:
-        return False;
+        return False
+
+
+@register.filter(name="filtroDataFinal")
+def filtroDataFinal(datafinal):
+    if(datafinal < date.today()):
+        return False 
+    else:
+        return True

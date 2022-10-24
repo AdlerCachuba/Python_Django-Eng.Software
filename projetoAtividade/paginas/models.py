@@ -62,7 +62,7 @@ class Atividade(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
-        return '{}'.format(self.nome)
+        return '{}'.format(self.titulo)
 
 
 
@@ -80,7 +80,7 @@ class Demanda(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
-        return '{}'.format(self.nome)
+        return '{}'.format(self.titulo)
 
 
 
