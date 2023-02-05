@@ -1,1 +1,1 @@
-# python_django
+# Projeto Python Django Web.
